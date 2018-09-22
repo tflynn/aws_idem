@@ -394,7 +394,6 @@ class TestIamActions(unittest.TestCase):
             result = policy_m.delete_policy(client=iam_client,policy_arn=policy_arn)
             self.assertTrue("error" in result)
 
+
 if __name__ == '__main__':
     unittest.main()
-
-

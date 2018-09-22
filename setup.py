@@ -1,6 +1,16 @@
 from setuptools import setup, find_packages
+import setuptools.command.test
 
-setup(name='aws idem',
+class TestCommand(setuptools.command.test.test):
+    """ Setuptools test command explicitly using test discovery. """
+
+    def _test_args(self):
+        yield 'discover'
+        for arg in super(TestCommand, self)._test_args():
+            yield arg
+
+
+setup(name='aws_idem',
       version='0.1',
       description='AWS  idempotent wrappers for some boto3 calls',
       url='https://github.com/tflynn/aws_idem.git',
@@ -9,4 +19,8 @@ setup(name='aws idem',
       license='MIT',
       packages=find_packages(),
       install_requires=['boto3'],
+      #test_suite="tests",
+      cmdclass={
+          'test': TestCommand,
+      },
       zip_safe=False)
