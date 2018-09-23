@@ -31,7 +31,7 @@ def placebo_files_directory():
     return placebo_dir
 
 
-class TestIamActions(unittest.TestCase):
+class TestIamPolicyActions(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
@@ -102,10 +102,6 @@ class TestIamActions(unittest.TestCase):
         #policy_json = json.loads(policy_doc_json)
         return policy_doc_json
 
-    def test_it(self):
-        self.assertEqual(self.test_data['ecr_repo_data']['repositoryName'],
-                         self.test_data['ecr_repo_data']['repo_name'])
-
     def test_001_create_new_policy_no_defaults(self):
 
         data = self.test_data['policy_data']
@@ -115,14 +111,14 @@ class TestIamActions(unittest.TestCase):
         # Do it this way so placebo-based testing works
         iam_client = self.boto3_session.client('iam')
 
-        new_policy = policy_m.create_policy(
+        response = policy_m.create_policy(
             client=iam_client,
             policy_name=data['policy_name'],
             policy_document=policy_doc_json_str,
             description=data['policy_name'])
 
-        self.assertEqual(new_policy['state'], 'New')
-        self.assertEqual(new_policy['policy']['PolicyName'],data['policy_name'])
+        self.assertEqual(response['state'], 'New')
+        self.assertEqual(response['policy']['PolicyName'],data['policy_name'])
 
     def test_002_create_existing_policy_no_defaults(self):
 
@@ -133,14 +129,14 @@ class TestIamActions(unittest.TestCase):
         # Do it this way so placebo-based testing works
         iam_client = self.boto3_session.client('iam')
 
-        new_policy = policy_m.create_policy(
+        response = policy_m.create_policy(
             client=iam_client,
             policy_name=data['policy_name'],
             policy_document=policy_doc_json_str,
             description=data['policy_name'])
 
-        self.assertEqual(new_policy['state'], 'Exists')
-        self.assertEqual(new_policy['policy']['PolicyName'],data['policy_name'])
+        self.assertEqual(response['state'], 'Exists')
+        self.assertEqual(response['policy']['PolicyName'],data['policy_name'])
 
     def test_003_delete_existing_policy_by_name(self):
 
@@ -150,9 +146,9 @@ class TestIamActions(unittest.TestCase):
         # Do it this way so placebo-based testing works
         iam_client = self.boto3_session.client('iam')
 
-        result = policy_m.delete_policy(client=iam_client, policy_name=policy_name)
-        self.assertEqual(result['deleted'], True)
-        self.assertEqual(result['policy_name'], policy_name)
+        response = policy_m.delete_policy(client=iam_client, policy_name=policy_name)
+        self.assertEqual(response['deleted'], True)
+        self.assertEqual(response['policy_name'], policy_name)
 
     def test_004_delete_existing_policy_by_arn(self):
 
@@ -165,17 +161,17 @@ class TestIamActions(unittest.TestCase):
         # Do it this way so placebo-based testing works
         iam_client = self.boto3_session.client('iam')
 
-        new_policy = policy_m.create_policy(
+        response = policy_m.create_policy(
             client=iam_client,
             policy_name=data['policy_name'],
             policy_document=policy_doc_json_str,
             description=data['policy_name'])
 
-        policy_arn = new_policy['policy']['Arn']
+        policy_arn = response['policy']['Arn']
 
-        result = policy_m.delete_policy(client=iam_client,policy_arn=policy_arn)
-        self.assertEqual(result['deleted'], True)
-        self.assertEqual(result['policy_arn'],policy_arn)
+        response = policy_m.delete_policy(client=iam_client,policy_arn=policy_arn)
+        self.assertEqual(response['deleted'], True)
+        self.assertEqual(response['policy_arn'],policy_arn)
 
     def test_005_delete_non_existent_policy_by_name(self):
 
@@ -185,8 +181,8 @@ class TestIamActions(unittest.TestCase):
         # Do it this way so placebo-based testing works
         iam_client = self.boto3_session.client('iam')
 
-        result = policy_m.delete_policy(client=iam_client, policy_name=policy_name)
-        self.assertTrue("error" in result)
+        response = policy_m.delete_policy(client=iam_client, policy_name=policy_name)
+        self.assertTrue("error" in response)
 
     def test_006_delete_non_existent_policy_by_arn(self):
 
@@ -195,8 +191,8 @@ class TestIamActions(unittest.TestCase):
         # Do it this way so placebo-based testing works
         iam_client = self.boto3_session.client('iam')
 
-        result = policy_m.delete_policy(client=iam_client, policy_arn=policy_arn)
-        self.assertTrue("error" in result)
+        response = policy_m.delete_policy(client=iam_client, policy_arn=policy_arn)
+        self.assertTrue("error" in response)
 
 
 if __name__ == '__main__':

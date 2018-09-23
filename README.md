@@ -5,10 +5,14 @@ Lightweight implementations of subsets of some AWS Boto3 features.
 This toolset is mostly intended for tools that support 
 system configuration and management.
 
-All calls are idempotent except as explicitly noted or in
-cases where it is impractical. e.g:
-* Deletion of KMS keys since deletion is not immediate.
+All calls can be rerun multiple times without harm. 
 
+Typically, the first call actually affects the applicable resource. 
+Second and subsequent calls have no effect, but should much the same data
+as the original call. 
+ 
+In the cases where this is not practical, this is noted. e.g:
+* Deletion of KMS keys since deletion is not immediate.
 
 ## Installation
 
@@ -16,7 +20,15 @@ cases where it is impractical. e.g:
 
 ## Usage
 
-`from aws_idem.iam import policy`
+```
+from aws_idem.iam import policy
+
+policy.create_policy(policy_name, policy_document, description)
+policy.list_policies_by_name(name_regex)
+policy.delete_policy(policy_name)
+policy.delete_policy(policy_arn)
+```
+
 
 ## Testing
 
