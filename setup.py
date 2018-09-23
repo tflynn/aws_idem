@@ -18,9 +18,10 @@ setup(name='aws_idem',
       author_email='tracysflynn@gmail.com',
       license='MIT',
       packages=find_packages(),
-      install_requires=['boto3'],
-      #test_suite="tests",
-      cmdclass={
-          'test': TestCommand,
-      },
+      install_requires=['boto3','placebo'],
+      test_suite='nose.collector',
+      tests_require=['nose'],
+      # cmdclass={
+      #     'test': TestCommand,
+      # },
       zip_safe=False)

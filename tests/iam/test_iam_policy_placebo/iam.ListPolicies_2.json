@@ -1,0 +1,49 @@
+{
+    "status_code": 200,
+    "data": {
+        "Policies": [
+            {
+                "PolicyName": "test_policy_ecr_ro",
+                "PolicyId": "ANPAJQYXJSGMEPL3JS3JI",
+                "Arn": "arn:aws:iam::097064421904:policy/test_policy_ecr_ro",
+                "Path": "/",
+                "DefaultVersionId": "v1",
+                "AttachmentCount": 0,
+                "PermissionsBoundaryUsageCount": 0,
+                "IsAttachable": true,
+                "CreateDate": {
+                    "__class__": "datetime",
+                    "year": 2018,
+                    "month": 9,
+                    "day": 23,
+                    "hour": 14,
+                    "minute": 57,
+                    "second": 14,
+                    "microsecond": 0
+                },
+                "UpdateDate": {
+                    "__class__": "datetime",
+                    "year": 2018,
+                    "month": 9,
+                    "day": 23,
+                    "hour": 14,
+                    "minute": 57,
+                    "second": 14,
+                    "microsecond": 0
+                }
+            }
+        ],
+        "IsTruncated": false,
+        "ResponseMetadata": {
+            "RequestId": "f563073e-bf40-11e8-8046-53b21d0931d4",
+            "HTTPStatusCode": 200,
+            "HTTPHeaders": {
+                "x-amzn-requestid": "f563073e-bf40-11e8-8046-53b21d0931d4",
+                "content-type": "text/xml",
+                "content-length": "863",
+                "date": "Sun, 23 Sep 2018 14:57:14 GMT"
+            },
+            "RetryAttempts": 0
+        }
+    }
+}

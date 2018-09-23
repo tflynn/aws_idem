@@ -1,0 +1,18 @@
+{
+    "status_code": 200,
+    "data": {
+        "Policies": [],
+        "IsTruncated": false,
+        "ResponseMetadata": {
+            "RequestId": "f53f7a2b-bf40-11e8-ab1b-c36f6b03b867",
+            "HTTPStatusCode": 200,
+            "HTTPHeaders": {
+                "x-amzn-requestid": "f53f7a2b-bf40-11e8-ab1b-c36f6b03b867",
+                "content-type": "text/xml",
+                "content-length": "304",
+                "date": "Sun, 23 Sep 2018 14:57:13 GMT"
+            },
+            "RetryAttempts": 0
+        }
+    }
+}
