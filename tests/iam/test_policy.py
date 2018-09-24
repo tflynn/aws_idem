@@ -31,7 +31,7 @@ def placebo_files_directory():
     return placebo_dir
 
 
-class TestIamPolicyActions(unittest.TestCase):
+class TestPolicy(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
@@ -106,7 +106,7 @@ class TestIamPolicyActions(unittest.TestCase):
 
         data = self.test_data['policy_data']
         policy_resources = [self.test_data['ecr_repo_data']['repositoryArn']]
-        policy_doc_json_str = self.policy_document(policy_resources)
+        policy_doc_json = self.policy_document(policy_resources)
 
         # Do it this way so placebo-based testing works
         iam_client = self.boto3_session.client('iam')
@@ -114,7 +114,7 @@ class TestIamPolicyActions(unittest.TestCase):
         response = policy_m.create_policy(
             client=iam_client,
             policy_name=data['policy_name'],
-            policy_document=policy_doc_json_str,
+            policy_document=policy_doc_json,
             description=data['policy_name'])
 
         self.assertEqual(response['state'], 'New')
@@ -124,7 +124,7 @@ class TestIamPolicyActions(unittest.TestCase):
 
         data = self.test_data['policy_data']
         policy_resources = [self.test_data['ecr_repo_data']['repositoryArn']]
-        policy_doc_json_str = self.policy_document(policy_resources)
+        policy_doc_json = self.policy_document(policy_resources)
 
         # Do it this way so placebo-based testing works
         iam_client = self.boto3_session.client('iam')
@@ -132,7 +132,7 @@ class TestIamPolicyActions(unittest.TestCase):
         response = policy_m.create_policy(
             client=iam_client,
             policy_name=data['policy_name'],
-            policy_document=policy_doc_json_str,
+            policy_document=policy_doc_json,
             description=data['policy_name'])
 
         self.assertEqual(response['state'], 'Exists')
