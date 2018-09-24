@@ -20,6 +20,9 @@ import boto3
 from aws_idem.iam import policy as policy_m
 
 
+PLACEBO_MODE="playback"
+
+
 def placebo_files_directory():
     full_path = path.realpath(__file__)
     dirname = path.dirname(full_path)
@@ -37,14 +40,18 @@ class TestPolicy(unittest.TestCase):
     def setUpClass(cls):
 
         global placebo_files_directory
+        global PLACEBO_MODE
         placebo_dir_method = placebo_files_directory
         cls.placebo_dir = placebo_dir_method()
         cls.boto3_session = boto3.Session()
         cls.pill = placebo.attach(cls.boto3_session, data_path=cls.placebo_dir)
 
         # Pill record/playback have to be called before anything else
-        # cls.pill.record()
-        cls.pill.playback()
+        if PLACEBO_MODE == 'record' or os.environ.get('PLACEBO_MODE') == 'record':
+            cls.pill.record()
+        else:
+            cls.pill.playback()
+
 
         cls.test_data = {}
         cls.test_data['ecr_repo_data'] = {}
