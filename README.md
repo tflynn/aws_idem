@@ -8,7 +8,7 @@ system configuration and management.
 All calls can be rerun multiple times without harm. 
 
 Typically, the first call actually affects the applicable resource. 
-Second and subsequent calls have no effect, but should much the same data
+Second and subsequent calls have no effect, but should return much the same data
 as the original call. 
  
 In the cases where this is not practical, this is noted. e.g:
@@ -48,14 +48,16 @@ The easiest way to run the tests is using 'nose' at the root of the code tree.
 * Name them so they fall in the correct sequence - e.g. test\_\<nnn\>\_...
 * Delete applicable AWS resources
 * Delete the applicable '\_placebo' subdirectory
-* Comment out `cls.pill.playback()` in the applicable 'setUpClass' method.
-* Uncomment `cls.pill.record()` in the applicable 'setUpClass' method.
+* Either:
+    * Set the environment variable 'PLACEBO_MODE' to 'record'
+* Or:
+    * Change the value for 'PLACEBO_MODE' to 'record' towards the top of the test file
 * Run all the tests once to collect the placebo output
-* Uncomment `cls.pill.playback()` in the applicable 'setUpClass' method.
-* Comment out `cls.pill.record()` in the applicable 'setUpClass' method.
+* Either:
+    * Set the environment variable 'PLACEBO_MODE' to  'playback' or clear it.
+* Or:
+    * Change the value for 'PLACEBO_MODE' to 'playback' towards the top of the test file
 * Delete applicable AWS resources
 
-## AWS IAM
 
-### Policies
 
